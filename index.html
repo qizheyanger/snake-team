@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- 这是一个私人纪念页：禁止搜索引擎收录 -->
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="googlebot" content="noindex">
+<title>颜射队 · 我们的球场记忆</title>
+<style>
+  :root{
+    --bg:#0c0e14;
+    --bg2:#12151f;
+    --card:rgba(255,255,255,.035);
+    --stroke:rgba(255,255,255,.09);
+    --text:#f2f4f8;
+    --muted:#9aa3b5;
+    --org:#ff6b1a;          /* 篮球橙 */
+    --org2:#ffa04d;
+    --grad:linear-gradient(95deg,#ff6b1a,#ffa04d);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+  ::selection{background:rgba(255,107,26,.4)}
+  img{display:block}
+
+  /* ===== 导航 ===== */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:60;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 6vw;background:rgba(12,14,20,.72);backdrop-filter:blur(16px);
+    border-bottom:1px solid var(--stroke);
+  }
+  .logo{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.12em;font-size:17px}
+  .ball{width:26px;height:26px;border-radius:50%;background:var(--grad);position:relative;flex:none}
+  .ball::before,.ball::after{content:"";position:absolute;inset:0;border-radius:50%;border:1.5px solid rgba(0,0,0,.45)}
+  .ball::before{clip-path:inset(45% 0)}
+  .ball::after{clip-path:inset(0 45%)}
+  nav ul{display:flex;gap:32px;list-style:none}
+  nav a{color:var(--muted);text-decoration:none;font-size:14px;transition:.3s}
+  nav a:hover{color:var(--org)}
+  .nav-cta{padding:9px 22px;border-radius:99px;background:var(--grad);color:#fff!important;font-weight:700;box-shadow:0 0 22px rgba(255,107,26,.4);transition:.3s}
+  .nav-cta:hover{transform:translateY(-2px);box-shadow:0 0 34px rgba(255,107,26,.65)}
+
+  /* ===== Hero ===== */
+  .hero{
+    position:relative;min-height:100vh;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;text-align:center;padding:120px 6vw 70px;overflow:hidden;
+  }
+  /* 背景大图 + 压暗 */
+  .hero .bg{position:absolute;inset:0;z-index:-2}
+  .hero .bg img{width:100%;height:100%;object-fit:cover;opacity:.34}
+  .hero::after{content:"";position:absolute;inset:0;z-index:-1;
+    background:linear-gradient(180deg,rgba(12,14,20,.55),rgba(12,14,20,.25) 45%,var(--bg) 96%)}
+  /* 橙色氛围光 */
+  .hero .glow{position:absolute;width:640px;height:640px;border-radius:50%;filter:blur(150px);
+    background:rgba(255,107,26,.22);top:-180px;right:-160px;z-index:-1}
+
+  .tag{
+    display:inline-flex;align-items:center;gap:9px;font-size:12px;letter-spacing:.28em;color:var(--org2);
+    border:1px solid rgba(255,107,26,.4);background:rgba(255,107,26,.08);
+    padding:8px 20px;border-radius:99px;margin-bottom:26px;
+  }
+  .tag i{width:6px;height:6px;border-radius:50%;background:var(--org);animation:pulse 1.5s infinite}
+  @keyframes pulse{50%{opacity:.2;transform:scale(.5)}}
+
+  h1{font-size:clamp(46px,8.5vw,110px);font-weight:900;line-height:1.05;letter-spacing:.02em}
+  h1 .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .en{margin-top:14px;font-size:clamp(14px,2vw,20px);letter-spacing:.65em;color:var(--muted);font-weight:300}
+  .slogan{margin-top:26px;max-width:640px;color:#c6cddc;font-size:17px;line-height:2}
+  .hero-btns{margin-top:42px;display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+  .btn{padding:14px 36px;border-radius:99px;text-decoration:none;font-size:15px;font-weight:600;transition:.3s}
+  .btn-p{background:var(--grad);color:#fff;box-shadow:0 8px 30px rgba(255,107,26,.4)}
+  .btn-p:hover{transform:translateY(-3px);box-shadow:0 14px 42px rgba(255,107,26,.6)}
+  .btn-g{border:1px solid var(--stroke);color:var(--text);background:rgba(255,255,255,.03)}
+  .btn-g:hover{border-color:var(--org);color:var(--org)}
+
+  /* 数据条 */
+  .stats{margin-top:80px;width:min(920px,100%);display:grid;grid-template-columns:repeat(4,1fr);
+    gap:1px;background:var(--stroke);border:1px solid var(--stroke);border-radius:20px;overflow:hidden}
+  .stat{background:rgba(18,21,31,.85);padding:26px 8px;text-align:center}
+  .stat b{display:block;font-size:34px;font-weight:900;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stat span{font-size:12px;color:var(--muted);letter-spacing:.18em}
+
+  /* ===== 通用 ===== */
+  section{padding:110px 6vw;position:relative}
+  .kicker{font-size:12px;letter-spacing:.4em;color:var(--org);margin-bottom:14px;font-weight:700}
+  h2{font-size:clamp(28px,4.2vw,46px);font-weight:900;margin-bottom:16px}
+  .lead{color:var(--muted);max-width:600px;line-height:2}
+
+  /* ===== 关于 ===== */
+  .about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;margin-top:20px}
+  .about-img{position:relative;border-radius:22px;overflow:hidden;border:1px solid var(--stroke)}
+  .about-img img{width:100%;height:420px;object-fit:cover;transition:.7s}
+  .about-img:hover img{transform:scale(1.05)}
+  .about-img .frame{position:absolute;inset:14px;border:1px solid rgba(255,107,26,.5);border-radius:14px;pointer-events:none}
+  .about-txt p{color:#b9c1d4;line-height:2.15;margin-bottom:18px;font-size:15.5px}
+  .about-txt b{color:var(--org2)}
+
+  /* ===== 球员 ===== */
+  .roster{margin-top:56px;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px}
+  .player{
+    position:relative;border-radius:20px;overflow:hidden;border:1px solid var(--stroke);
+    background:var(--card);transition:.4s;
+  }
+  .player:hover{transform:translateY(-8px);border-color:rgba(255,107,26,.55);box-shadow:0 18px 44px rgba(0,0,0,.5)}
+  .player .ph{height:290px;overflow:hidden;position:relative}
+  .player .ph img{width:100%;height:100%;object-fit:cover;filter:grayscale(.25);transition:.6s}
+  .player:hover .ph img{transform:scale(1.07);filter:none}
+  .player .no{
+    position:absolute;top:10px;right:14px;font-size:52px;font-weight:900;font-style:italic;
+    color:rgba(255,255,255,.9);text-shadow:0 2px 14px rgba(0,0,0,.6);
+  }
+  .player .pos{
+    position:absolute;top:18px;left:14px;font-size:11px;letter-spacing:.15em;padding:5px 12px;border-radius:99px;
+    background:rgba(255,107,26,.85);color:#fff;font-weight:700;
+  }
+  .player .info{padding:20px 20px 22px}
+  .player h3{font-size:19px;margin-bottom:4px}
+  .player .role{font-size:12.5px;color:var(--org2);letter-spacing:.1em;margin-bottom:12px}
+  .player .line{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);border-top:1px dashed var(--stroke);padding-top:12px}
+  .player .line b{color:var(--text)}
+
+  /* ===== 球员名单表格 ===== */
+  .table-wrap{margin-top:56px;border:1px solid var(--stroke);border-radius:20px;overflow-x:auto;background:var(--card)}
+  table.team{width:100%;border-collapse:collapse;font-size:15px;min-width:560px}
+  table.team th{
+    text-align:left;padding:16px 22px;font-size:12px;letter-spacing:.25em;color:var(--org2);
+    background:rgba(255,107,26,.08);border-bottom:1px solid var(--stroke);white-space:nowrap;
+  }
+  /* 首列按内容收窄，末列吸收剩余宽度，避免两列均分导致姓名跑到中间 */
+  table.team th:first-child,table.team td:first-child{width:1%}
+  table.team th:last-child,table.team td:last-child{width:100%}
+  table.team td{padding:14px 22px;border-bottom:1px solid rgba(255,255,255,.05);color:#c6cddc}
+  table.team tr:last-child td{border-bottom:none}
+  table.team tbody tr{transition:.25s}
+  table.team tbody tr:hover{background:rgba(255,107,26,.06)}
+  table.team tbody tr:hover td{color:#fff}
+  .no-badge{
+    display:inline-grid;place-items:center;min-width:44px;padding:5px 10px;border-radius:10px;
+    background:linear-gradient(135deg,rgba(255,107,26,.3),rgba(255,160,77,.12));
+    border:1px solid rgba(255,107,26,.4);color:var(--org2);font-weight:800;font-style:italic;
+  }
+  .pname{font-weight:700;color:var(--text);font-size:16px}
+
+  /* ===== 荣誉时间线 ===== */
+  .timeline{margin-top:60px;position:relative;padding-left:34px}
+  .timeline::before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--org),rgba(255,107,26,.08))}
+  .tl-item{position:relative;padding:0 0 44px 26px}
+  .tl-item::before{content:"";position:absolute;left:-32px;top:6px;width:14px;height:14px;border-radius:50%;
+    background:var(--bg);border:3px solid var(--org);box-shadow:0 0 14px rgba(255,107,26,.6)}
+  .tl-item .yr{font-size:13px;color:var(--org);font-weight:800;letter-spacing:.2em}
+  .tl-item h3{font-size:19px;margin:8px 0 8px}
+  .tl-item p{color:var(--muted);font-size:14.5px;line-height:1.9;max-width:640px}
+
+  /* ===== 画廊 ===== */
+  .gallery{margin-top:56px;display:grid;gap:16px;grid-template-columns:repeat(4,1fr);grid-auto-rows:220px;
+    grid-template-areas:"a a b c" "a a d d" "e f d d"}
+  .g{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--stroke);cursor:pointer}
+  .g img{width:100%;height:100%;object-fit:cover;transition:.7s cubic-bezier(.2,.8,.2,1)}
+  .g:hover img{transform:scale(1.09)}
+  .g .cap{position:absolute;inset:auto 0 0 0;padding:38px 16px 14px;font-size:13.5px;
+    background:linear-gradient(transparent,rgba(5,6,10,.92));opacity:0;transform:translateY(8px);transition:.4s}
+  .g:hover .cap{opacity:1;transform:none}
+  .g:nth-child(1){grid-area:a}.g:nth-child(2){grid-area:b}.g:nth-child(3){grid-area:c}
+  .g:nth-child(4){grid-area:d}.g:nth-child(5){grid-area:e}.g:nth-child(6){grid-area:f}
+
+  /* ===== 招募 CTA ===== */
+  .cta{
+    margin:30px 6vw 100px;padding:90px 8vw;border-radius:28px;text-align:center;position:relative;overflow:hidden;
+    background:linear-gradient(135deg,rgba(255,107,26,.14),rgba(255,160,77,.05));
+    border:1px solid rgba(255,107,26,.3);
+  }
+  .cta::before{content:"";position:absolute;width:560px;height:560px;border-radius:50%;filter:blur(130px);
+    background:rgba(255,107,26,.28);top:-300px;left:50%;transform:translateX(-50%)}
+  .cta h2{font-size:clamp(26px,4vw,44px)}
+  .cta p{color:var(--muted);margin:18px auto 36px;max-width:540px;line-height:2}
+
+  footer{padding:38px 6vw;border-top:1px solid var(--stroke);display:flex;justify-content:space-between;
+    align-items:center;flex-wrap:wrap;gap:14px;color:var(--muted);font-size:13px;letter-spacing:.08em}
+
+  /* ===== 滚动入场 ===== */
+  .reveal{opacity:0;transform:translateY(34px);transition:.9s cubic-bezier(.2,.8,.2,1)}
+  .reveal.on{opacity:1;transform:none}
+
+  @media(max-width:860px){
+    nav ul{display:none}
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .about-grid{grid-template-columns:1fr}
+    .gallery{grid-template-columns:repeat(2,1fr);grid-auto-rows:170px;grid-template-areas:"a a" "b c" "d d" "e f"}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo"><span class="ball"></span>东北大学 · 颜射队</div>
+  <ul>
+    <li><a href="#about">我们的故事</a></li>
+    <li><a href="#roster">这些人</a></li>
+    <li><a href="#squad">名单</a></li>
+    <li><a href="#honors">那些日子</a></li>
+    <li><a href="#gallery">那些瞬间</a></li>
+  </ul>
+  <a class="nav-cta" href="#join">写在最后</a>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <div class="bg"><img src="img/court.jpg" alt="主场野球场"></div>
+  <div class="glow"></div>
+  <span class="tag"><i></i>NORTHEASTERN UNIVERSITY · 一群人的球场记忆</span>
+  <h1>东北大学<br><span class="grad">颜射队</span></h1>
+  <div class="en">FACE UP SQUAD</div>
+  <p class="slogan">很多年后，也许没人再踏上那片球场，<br>也许没人会打开这个网页——<br>但球进网的声音、散场的路灯、火锅的热气，都留在这里了。</p>
+  <div class="hero-btns">
+    <a class="btn btn-p" href="#roster">看看这些人</a>
+    <a class="btn btn-g" href="#honors">翻翻那些日子 →</a>
+  </div>
+  <div class="stats">
+    <div class="stat"><b data-n="15">0</b><span>起过名字的人</span></div>
+    <div class="stat"><b data-n="999">0</b><span>个夜晚留在球场</span></div>
+    <div class="stat"><b data-n="999">0</b><span>次散场后的夜宵</span></div>
+    <div class="stat"><b data-n="9999" data-suffix="+">0</b><span>次颜射</span></div>
+  </div>
+</header>
+
+<!-- ================= 关于 ================= -->
+<section id="about">
+  <p class="kicker reveal">OUR STORY</p>
+  <h2 class="reveal">我们的故事</h2>
+  <div class="about-grid">
+    <div class="about-img reveal">
+      <img src="img/team.jpg" alt="球队合影">
+      <div class="frame"></div>
+    </div>
+    <div class="about-txt reveal">
+      <p>这支球队不是为了拿冠军建的。它只是几个同学，因为<b>都想打球</b>，就凑到了一起——起了个不太正经的名字，买了属于自己的球衣，然后把一个个下了课、放了研的傍晚，都交给了那片露天球场。</p>
+      <p>我们记得浑南的风，记得打到天黑看不清篮筐，记得进球后的吼、打铁后的笑，记得散场后一起去吃的那顿<b>热热闹闹的夜宵</b>。球赢没赢，其实没那么重要。</p>
+      <p>做这个网页，是想把这些存下来。等哪天大家各奔东西、再凑不齐一场比赛，至少还有一个地方，能让我们想起——<b>那年我们一起打过球。</b></p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 球员 ================= -->
+<section id="roster">
+  <p class="kicker reveal">THE PEOPLE</p>
+  <h2 class="reveal">这些人</h2>
+  <p class="lead reveal">球衣上的名字会旧，照片里的人会散。但按下快门的那一刻，我们都还在一起。</p>
+  <div class="roster">
+    <div class="player reveal">
+      <div class="ph"><img src="img/jersey_new.jpg" alt="路智昊 18号 战袍"><span class="no">18</span></div>
+      <div class="info"><h3>路智昊</h3><div class="role">新球衣到手那天，比过年还高兴</div><div class="line"><span>入队 <b>2026</b></span><span>首秀 <b>还在等</b></span></div></div>
+    </div>
+    <div class="player reveal">
+      <div class="ph"><img src="img/jersey_black.jpg" alt="姜旭霖 25号 黑色战袍"><span class="no">25</span></div>
+      <div class="info"><h3>姜旭霖</h3><div class="role">队里最稳的那堵墙，也是合影必摆pose的那个</div><div class="line"><span>对抗 <b>从不躲</b></span><span>镜头感 <b>满分</b></span></div></div>
+    </div>
+    <div class="player reveal">
+      <div class="ph"><img src="img/shoot.jpg" alt="颜射姿势"><span class="no">★</span></div>
+      <div class="info"><h3>出手的两个人</h3><div class="role">球馆的灯关了，还在比谁的姿势标准</div><div class="line"><span>姿势 <b>教科书</b></span><span>认真 <b>不打折</b></span></div></div>
+    </div>
+    <div class="player reveal">
+      <div class="ph"><img src="img/metro.jpg" alt="赛后地铁"><span class="no">∞</span></div>
+      <div class="info"><h3>散场后的地铁</h3><div class="role">打累了就靠着睡，谁也没说话，但都很踏实</div><div class="line"><span>电量 <b>1%</b></span><span>安心 <b>100%</b></span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 球员名单 ================= -->
+<section id="squad">
+  <p class="kicker reveal">THE LIST</p>
+  <h2 class="reveal">名单</h2>
+  <p class="lead reveal">十五个人，十五个号码。一个都不少，全都在这儿。</p>
+  <div class="table-wrap reveal">
+    <table class="team">
+      <thead>
+        <tr><th>号码</th><th>姓名</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="no-badge">1</span></td><td class="pname">潘胤良</td></tr>
+        <tr><td><span class="no-badge">4</span></td><td class="pname">武卓阳</td></tr>
+        <tr><td><span class="no-badge">6</span></td><td class="pname">雍正扬</td></tr>
+        <tr><td><span class="no-badge">7</span></td><td class="pname">王金程</td></tr>
+        <tr><td><span class="no-badge">8</span></td><td class="pname">武增光</td></tr>
+        <tr><td><span class="no-badge">11</span></td><td class="pname">毛煜森</td></tr>
+        <tr><td><span class="no-badge">16</span></td><td class="pname">王睿骐</td></tr>
+        <tr><td><span class="no-badge">18</span></td><td class="pname">路智昊</td></tr>
+        <tr><td><span class="no-badge">19</span></td><td class="pname">肖杰</td></tr>
+        <tr><td><span class="no-badge">25</span></td><td class="pname">姜旭霖</td></tr>
+        <tr><td><span class="no-badge">35</span></td><td class="pname">赵钧</td></tr>
+        <tr><td><span class="no-badge">37</span></td><td class="pname">黄远</td></tr>
+        <tr><td><span class="no-badge">39</span></td><td class="pname">李一星</td></tr>
+        <tr><td><span class="no-badge">45</span></td><td class="pname">许广立</td></tr>
+        <tr><td><span class="no-badge">0</span></td><td class="pname">肖熠飞</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ================= 荣誉 ================= -->
+<section id="honors">
+  <p class="kicker reveal">MEMORIES</p>
+  <h2 class="reveal">那些日子</h2>
+  <div class="timeline">
+    <div class="tl-item reveal"><div class="yr">某一天</div><h3>我们决定建一支球队</h3><p>没有隆重的仪式，就是几个人一拍即合——名字取得不太正经，但每个人都当真了。从那天起，浑南的球场有了属于我们的一群人。</p></div>
+    <div class="tl-item reveal"><div class="yr">训练日</div><h3>打到天黑看不清篮筐</h3><p>下课的下课，放研的放研，人到齐了就开打。风很大，天很冷，但没人先说走。输赢都喊，打铁都笑。</p></div>
+    <div class="tl-item reveal"><div class="yr">2025.12</div><h3>球衣到货的那天</h3><p>印着"颜射队"的球衣拆开那一刻，比发工资还激动。从此我们不只是"一起打球的人"，我们是一支队。</p></div>
+    <div class="tl-item reveal"><div class="yr">赛后</div><h3>火锅、烤串与深夜地铁</h3><p>比比赛更重要的环节：围一桌铜锅，抢最后一串肉，然后挤上末班地铁，累到靠着肩膀就睡着。</p></div>
+    <div class="tl-item reveal"><div class="yr">2026</div><h3>现在，我们把回忆存进了这里</h3><p>照片会旧，人会散场。但只要这个网页还在，那年球场上的风、笑声和篮球撞地的声音，就都还在。</p></div>
+  </div>
+</section>
+
+<!-- ================= 画廊 ================= -->
+<section id="gallery">
+  <p class="kicker reveal">MOMENTS</p>
+  <h2 class="reveal">那些瞬间</h2>
+  <p class="lead reveal">当时只道是寻常。等回过头才懂，这些不起眼的傍晚，就是我们要找的东西。</p>
+  <div class="gallery">
+    <figure class="g reveal"><img src="img/squad2.jpg" alt="全队合影" loading="lazy"><figcaption class="cap">人最齐的一次 · 都举着大拇指</figcaption></figure>
+    <figure class="g reveal"><img src="img/hotpot.jpg" alt="赛后火锅" loading="lazy"><figcaption class="cap">打完球的那顿铜锅 · 比球赛还热闹</figcaption></figure>
+    <figure class="g reveal"><img src="img/jersey_red.jpg" alt="红色战袍" loading="lazy"><figcaption class="cap">属于我们的红色战袍 · 25 号</figcaption></figure>
+    <figure class="g reveal"><img src="img/court.jpg" alt="主场野球场" loading="lazy"><figcaption class="cap">浑南那片球场 · 我们的主场</figcaption></figure>
+    <figure class="g reveal"><img src="img/noodles.jpg" alt="深夜夜宵" loading="lazy"><figcaption class="cap">散场后的深夜食堂 · 加满料</figcaption></figure>
+    <figure class="g reveal"><img src="img/ktv.jpg" alt="赛后放松" loading="lazy"><figcaption class="cap">玩累了就倒下 · 有兄弟在的地方都能睡</figcaption></figure>
+  </div>
+</section>
+
+<!-- ================= 招募 ================= -->
+<div class="cta reveal" id="join">
+  <h2>致每一个<br>一起打过球的人</h2>
+  <p>这个网页不对外宣传，也不招新。它是我们几个同学一起搭起来，用来存放这段日子的地方。也许以后没人再上球场，也许没人会再打开它——但只要我们还记得，这支球队就一直在。</p>
+  <a class="btn btn-p" href="#" onclick="alert('谢谢你看到这里。\n—— 颜射队，敬那段一起打球的日子 🏀');return false;">敬这段日子 🏀</a>
+</div>
+
+<footer>
+  <span>© 2026 东北大学颜射队 · 一个用来怀念的网页</span>
+  <span>献给那年一起打球的我们</span>
+</footer>
+
+<script>
+/* 滚动入场 */
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}
+}),{threshold:.15});
+document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%4*90)+'ms';io.observe(el);});
+
+/* 数字滚动 */
+const io2=new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting)return;io2.unobserve(e.target);
+  const el=e.target,n=+el.dataset.n,sfx=el.dataset.suffix||'',t0=performance.now();
+  (function tick(t){
+    const k=Math.min((t-t0)/1500,1),ease=1-Math.pow(1-k,3);
+    el.textContent=Math.round(n*ease)+sfx;
+    if(k<1)requestAnimationFrame(tick);
+  })(t0);
+}),{threshold:.6});
+document.querySelectorAll('.stat b').forEach(el=>io2.observe(el));
+</script>
+</body>
+</html>
