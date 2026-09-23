@@ -93,9 +93,23 @@
   /* ===== 关于 ===== */
   .about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;margin-top:20px}
   .about-img{position:relative;border-radius:22px;overflow:hidden;border:1px solid var(--stroke)}
-  .about-img img{width:100%;height:420px;object-fit:cover;transition:.7s}
-  .about-img:hover img{transform:scale(1.05)}
-  .about-img .frame{position:absolute;inset:14px;border:1px solid rgba(255,107,26,.5);border-radius:14px;pointer-events:none}
+  .about-img .frame{position:absolute;inset:14px;border:1px solid rgba(255,107,26,.5);border-radius:14px;pointer-events:none;z-index:3}
+  /* 轮播 */
+  .carousel{position:relative;height:420px}
+  .carousel .slide{position:absolute;inset:0;opacity:0;transition:opacity .9s ease;pointer-events:none}
+  .carousel .slide.on{opacity:1;pointer-events:auto}
+  .carousel .slide img{width:100%;height:100%;object-fit:cover;display:block}
+  .car-cap{position:absolute;left:0;right:0;bottom:0;padding:44px 20px 14px;font-size:13.5px;z-index:2;
+    background:linear-gradient(transparent,rgba(3,4,12,.85));pointer-events:none}
+  .car-dots{position:absolute;bottom:12px;right:18px;display:flex;gap:8px;z-index:4}
+  .car-dots i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.35);cursor:pointer;transition:.3s}
+  .car-dots i.on{background:var(--org);transform:scale(1.25);box-shadow:0 0 10px rgba(255,107,26,.8)}
+  .car-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:4;width:38px;height:38px;border-radius:50%;
+    border:1px solid rgba(255,255,255,.25);background:rgba(5,6,10,.45);color:#fff;font-size:16px;cursor:pointer;
+    display:grid;place-items:center;opacity:0;transition:.3s;backdrop-filter:blur(4px)}
+  .about-img:hover .car-arrow{opacity:1}
+  .car-arrow:hover{background:rgba(255,107,26,.75)}
+  .car-arrow.prev{left:14px}.car-arrow.next{right:14px}
   .about-txt p{color:#b9c1d4;line-height:2.15;margin-bottom:18px;font-size:15.5px}
   .about-txt b{color:var(--org2)}
 
@@ -214,7 +228,7 @@
   <span class="tag"><i></i>NORTHEASTERN UNIVERSITY · 一群人的球场记忆</span>
   <h1>东北大学<br><span class="grad">颜射队</span></h1>
   <div class="en">FACE UP SQUAD</div>
-  <p class="slogan">很多年后，也许没人再踏上那片球场，<br>也许没人会打开这个网页——<br>但球进网的声音、散场的路灯、火锅的热气，都留在这里了。</p>
+  <p class="slogan">很多年后，也许没人再踏上那片球场，<br>也许没人会打开这个网页——<br>但球进网的声音、散场的路灯、火锅的热气，我和队友们的故事都留在这里了。</p>
   <div class="hero-btns">
     <a class="btn btn-p" href="#roster">看看这些人</a>
     <a class="btn btn-g" href="#honors">翻翻那些日子 →</a>
@@ -233,12 +247,19 @@
   <h2 class="reveal">我们的故事</h2>
   <div class="about-grid">
     <div class="about-img reveal">
-      <img src="img/team.jpg" alt="球队合影">
+      <div class="carousel" id="teamCarousel">
+        <div class="slide on"><img src="img/team_white.jpg" alt="白色战袍全队合影"><div class="car-cap">白色战袍 · 浑南主场大合影</div></div>
+        <div class="slide"><img src="img/team.jpg" alt="赛前更衣室合影"><div class="car-cap">赛前更衣室 · 出发前的六个人</div></div>
+        <div class="slide"><img src="img/squad2.jpg" alt="餐厅整活合影"><div class="car-cap">餐厅篮筐下 · 人最齐的一次</div></div>
+        <button class="car-arrow prev" aria-label="上一张">‹</button>
+        <button class="car-arrow next" aria-label="下一张">›</button>
+        <div class="car-dots"></div>
+      </div>
       <div class="frame"></div>
     </div>
     <div class="about-txt reveal">
-      <p>这支球队不是为了拿冠军建的。它只是几个同学，因为<b>都想打球</b>，就凑到了一起——起了个不太正经的名字，买了属于自己的球衣，然后把一个个下了课、放了研的傍晚，都交给了那片露天球场。</p>
-      <p>我们记得浑南的风，记得打到天黑看不清篮筐，记得进球后的吼、打铁后的笑，记得散场后一起去吃的那顿<b>热热闹闹的夜宵</b>。球赢没赢，其实没那么重要。</p>
+      <p>这支球队不是为了拿冠军建的。它只是几个朋友，因为<b>都想打球</b>，就凑到了一起，想了个不太正经的名字，买了属于自己的球衣，然后把一个个下了课、抽出空隙的傍晚，都交给了篮球和彼此。</p>
+      <p>记得浑南夜晚返潮的外场地，可能每次并不是很人齐的球局，浑身湿透的衣服，和散落一地的空瓶子<b>有时会有热热闹闹的夜宵，有时只是在路边食堂的随便对付</b>。记忆是那么的模糊，又是那么的清晰，总想把那一天当做永远，可是永远不变的是一切都会变。</p>
       <p>做这个网页，是想把这些存下来。等哪天大家各奔东西、再凑不齐一场比赛，至少还有一个地方，能让我们想起——<b>那年我们一起打过球。</b></p>
     </div>
   </div>
@@ -341,6 +362,29 @@
 </footer>
 
 <script>
+/* ===== 合影轮播 ===== */
+(function(){
+  const box=document.getElementById('teamCarousel');
+  const slides=[...box.querySelectorAll('.slide')];
+  const dotsBox=box.querySelector('.car-dots');
+  let cur=0,timer;
+  slides.forEach((_,i)=>{const d=document.createElement('i');if(!i)d.classList.add('on');
+    d.onclick=()=>go(i);dotsBox.appendChild(d);});
+  const dots=[...dotsBox.children];
+  function go(i){
+    slides[cur].classList.remove('on');dots[cur].classList.remove('on');
+    cur=(i+slides.length)%slides.length;
+    slides[cur].classList.add('on');dots[cur].classList.add('on');
+    restart();
+  }
+  function restart(){clearInterval(timer);timer=setInterval(()=>go(cur+1),4500);}
+  box.querySelector('.prev').onclick=()=>go(cur-1);
+  box.querySelector('.next').onclick=()=>go(cur+1);
+  box.addEventListener('mouseenter',()=>clearInterval(timer));
+  box.addEventListener('mouseleave',restart);
+  restart();
+})();
+
 /* 滚动入场 */
 const io=new IntersectionObserver(es=>es.forEach(e=>{
   if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}
